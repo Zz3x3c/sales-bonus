@@ -13,27 +13,15 @@
     <script src="data/dataset_1.js"></script>
     <script src="src/main.js"></script>
     <script>
-        try {
-            const report = analyzeSalesData(data, {
-                calculateRevenue: calculateSimpleRevenue,
-                calculateBonus: calculateBonusByProfit
-            });
+        console.log(data);
 
-            // Создаем упрощенную версию для таблицы (без вложенных массивов)
-            const tableData = report.map(seller => ({
-                seller_id: seller.seller_id,
-                name: seller.name,
-                revenue: seller.revenue,
-                profit: seller.profit,
-                sales_count: seller.sales_count,
-                bonus: seller.bonus,
-                top_products: seller.top_products.map(p => `${p.sku}(${p.quantity})`).join(', ')
-            }));
+        const report = analyzeSalesData(data, {
+            calculateRevenue: calculateSimpleRevenue,
+            calculateBonus: calculateBonusByProfit
+        });
 
-            console.table(tableData);
-        } catch (error) {
-            console.error('Ошибка при анализе данных:', error);
-        }
+        if (console.table) console.table(report);
+        else console.log(report);
     </script>
 </body>
 </html>
